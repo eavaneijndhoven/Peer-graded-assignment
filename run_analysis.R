@@ -61,9 +61,4 @@ tidydata <- masterdata %>%
   group_by(activity, subjectid) %>%
   summarise_all(funs(mean))
 
-
-
-
-
-
-
+write.table(tidydata, "tidydata.txt",row.name=FALSE)

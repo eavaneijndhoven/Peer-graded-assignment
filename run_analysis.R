@@ -9,21 +9,21 @@ if (!file.exists(filename)){
   download.file(fileUrl, "dataset.zip", method = "curl")
 }
 
-dir_name <- "UCI HAR Dataset"
+dir_name <- "UCI HAR Dataset/"
 if (!file.exists(dir_name)){
   unzip("dataset.zip", exdir = ".")
 }
 
 # Read in features data set
-features <- read.table("UCI HAR Dataset/features.txt", col.names = c("n","functions"))
+features <- read.table(paste0(dir_name,"features.txt"), col.names = c("n","functions"))
 
 #Read in activity_labels
-activity_labels <- read.table("UCI HAR Dataset/activity_labels.txt", col.names = c("n", "activity"))
+activity_labels <- read.table(paste0(dir_name,"activity_labels.txt"), col.names = c("n", "activity"))
 
 # Read in test and train data sets
 for (i in c("train", "test")){
   for(j in c("X", "subject", "y")) {
-    assign(paste0(j,"_",i),read.table(paste0("UCI HAR Dataset/",i,"/",j,"_",i,".txt")))
+    assign(paste0(j,"_",i),read.table(paste0(dir_name,i,"/",j,"_",i,".txt")))
   }
   
   # Assign features data as X_test and X_train column names
@@ -61,4 +61,5 @@ tidydata <- masterdata %>%
   group_by(subjectid, activity) %>%
   summarise_all(funs(mean))
 
+# Export table as .txt file
 write.table(tidydata, "tidydata.txt",row.name=FALSE)

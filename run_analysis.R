@@ -39,7 +39,7 @@ for (i in c("train", "test")){
 
 # Merge test and train data
 masterdata <- rbind(train, test) %>%
-  select(activity, subjectid, contains("mean()"), contains("std()")) #Extracts only the measurements on the mean and standard deviation for each measurement
+  select(subjectid, activity, contains("mean()"), contains("std()")) #Extracts only the measurements on the mean and standard deviation for each measurement
 
 # Assign descriptive activity names to name the activities in the data set
 masterdata$activity <- factor(masterdata$activity,

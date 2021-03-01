@@ -56,7 +56,7 @@ for (i in 1:length(labels_abb)){
 
 colnames(masterdata) <- tolower(colnames(masterdata))
 
-# Reshape into tidy data
+# Create tidy data set with the average of each variable for each activity and each subject.
 tidydata <- masterdata %>%
   group_by(activity, subjectid) %>%
   summarise_all(funs(mean))

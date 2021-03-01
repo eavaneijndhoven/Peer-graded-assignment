@@ -58,7 +58,7 @@ colnames(masterdata) <- tolower(colnames(masterdata))
 
 # Create tidy data set with the average of each variable for each activity and each subject.
 tidydata <- masterdata %>%
-  group_by(activity, subjectid) %>%
+  group_by(subjectid, activity) %>%
   summarise_all(funs(mean))
 
 write.table(tidydata, "tidydata.txt",row.name=FALSE)
